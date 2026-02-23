@@ -33,7 +33,6 @@ socketHandler(io);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-const allowedOrigins = [
     process.env.CLIENT_URL,
     'http://localhost:3000',
     'http://localhost:5173',
@@ -59,6 +58,33 @@ if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
 }
 
+const allowedOrigins = [
+    process.env.CLIENT_URL,
+    'http://localhost:3000',
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'https://vaani-ten-gamma.vercel.app', // Add your Vercel frontend explicitly
+];
+app.use(cors({
+    origin: function (origin, callback) {
+        // allow requests with no origin (like mobile apps or curl requests)
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+        return callback(new Error('CORS not allowed from this origin: ' + origin), false);
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+    optionsSuccessStatus: 204
+}));
+// Handle preflight requests for all routes
+app.options('*', cors());
+app.use(helmet());
+if (process.env.NODE_ENV !== 'production') {
+    app.use(morgan('dev'));
+}
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/chat', chatRoutes);
