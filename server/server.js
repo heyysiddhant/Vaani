@@ -67,7 +67,6 @@ app.use(
   }),
 );
 
-app.options("*", cors());
 app.use(helmet());
 if (process.env.NODE_ENV !== "production") {
   app.use(morgan("dev"));
