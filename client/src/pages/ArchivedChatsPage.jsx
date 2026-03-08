@@ -70,22 +70,22 @@ const ArchivedChatsPage = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50/30 dark:bg-gray-950/30 transition-colors relative overflow-hidden">
+        <div className="min-h-screen bg-gray-50/30 transition-colors relative overflow-hidden">
             <div className="absolute top-[10%] right-[10%] w-[40%] h-[40%] bg-primary-600/5 blur-[120px] rounded-full mix-blend-screen pointer-events-none" />
             <div className="absolute bottom-[20%] left-[10%] w-[30%] h-[30%] bg-amber-600/5 blur-[120px] rounded-full mix-blend-screen pointer-events-none" />
 
             {/* Header */}
-            <div className="sticky top-0 z-50 bg-white/70 dark:bg-gray-900/70 backdrop-blur-2xl border-b border-gray-200/50 dark:border-white/5">
+            <div className="sticky top-0 z-50 bg-white/70 backdrop-blur-2xl border-b border-gray-200/50">
                 <div className="max-w-4xl mx-auto px-6 h-20 flex items-center justify-between">
                     <div className="flex items-center gap-6">
                         <button 
                             onClick={() => navigate('/dashboard')}
-                            className="p-3 bg-white/50 dark:bg-gray-800/50 hover:bg-gray-100 dark:bg-gray-800 rounded-2xl transition-all border border-gray-200/50 dark:border-white/5 shadow-sm text-gray-500 hover:text-gray-900 dark:hover:text-white group"
+                            className="p-3 bg-white/50 hover:bg-gray-100 rounded-2xl transition-all border border-gray-200/50 shadow-sm text-gray-500 hover:text-gray-900 group"
                         >
                             <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
                         </button>
                         <div>
-                            <h1 className="text-xl font-black text-gray-900 dark:text-white uppercase tracking-wider">Archived Chats</h1>
+                            <h1 className="text-xl font-black text-gray-900 uppercase tracking-wider">Archived Chats</h1>
                             <p className="text-[10px] font-bold text-amber-500 uppercase tracking-[0.2em]">Hidden Conversations</p>
                         </div>
                     </div>
@@ -100,12 +100,12 @@ const ArchivedChatsPage = () => {
                     </div>
                 ) : archivedChats.length === 0 ? (
                     <div className="flex flex-col items-center justify-center py-32 text-center space-y-6">
-                        <div className="w-24 h-24 bg-gray-100 dark:bg-gray-900 rounded-full flex items-center justify-center text-gray-300 dark:text-gray-800">
+                        <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center text-gray-300">
                             <Inbox size={48} />
                         </div>
                         <div className="space-y-2">
-                            <h2 className="text-2xl font-black text-gray-900 dark:text-white tracking-tight">Your Archive is Empty</h2>
-                            <p className="text-sm text-gray-500 dark:text-gray-400 max-w-xs font-medium">
+                            <h2 className="text-2xl font-black text-gray-900 tracking-tight">Your Archive is Empty</h2>
+                            <p className="text-sm text-gray-500 max-w-xs font-medium">
                                 Conversations you archive will appear here. They stay hidden from your main list until a new message arrives.
                             </p>
                         </div>
@@ -118,7 +118,7 @@ const ArchivedChatsPage = () => {
                     </div>
                 ) : (
                     <div className="space-y-4">
-                        <p className="text-[10px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em] mb-6 px-2">
+                        <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-6 px-2">
                             Showing {archivedChats.length} Archived {archivedChats.length === 1 ? 'Conversation' : 'Conversations'}
                         </p>
                         
@@ -126,34 +126,34 @@ const ArchivedChatsPage = () => {
                             {archivedChats.map((chat) => (
                                 <div 
                                     key={chat._id}
-                                    className="group relative bg-white/60 dark:bg-gray-900/50 backdrop-blur-xl rounded-[2.5rem] border border-gray-200/50 dark:border-white/5 p-4 transition-all hover:shadow-2xl hover:shadow-black/5 hover:-translate-y-1"
+                                    className="group relative bg-white/60 backdrop-blur-xl rounded-[2.5rem] border border-gray-200/50 p-4 transition-all hover:shadow-2xl hover:shadow-black/5 hover:-translate-y-1"
                                 >
                                     <div className="flex items-center gap-4">
                                         <div className="relative">
                                             <img 
                                                 src={getChatAvatar(chat)} 
                                                 alt={getChatName(chat)}
-                                                className="w-14 h-14 rounded-2xl object-cover border-2 border-white dark:border-gray-800 shadow-lg"
+                                                className="w-14 h-14 rounded-2xl object-cover border-2 border-white shadow-lg"
                                             />
                                             {chat.isGroup ? (
-                                                <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-primary-500 rounded-lg flex items-center justify-center text-white border-2 border-white dark:border-gray-900 shadow-sm">
+                                                <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-primary-500 rounded-lg flex items-center justify-center text-white border-2 border-white shadow-sm">
                                                     <Users size={12} />
                                                 </div>
                                             ) : (
-                                                <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white dark:border-gray-900"></div>
+                                                <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
                                             )}
                                         </div>
 
                                         <div className="flex-1 min-w-0" onClick={() => handleOpenChat(chat)}>
                                             <div className="flex items-center justify-between mb-1">
-                                                <h3 className="text-lg font-black text-gray-900 dark:text-white truncate tracking-tight cursor-pointer hover:text-primary-500 transition-colors">
+                                                <h3 className="text-lg font-black text-gray-900 truncate tracking-tight cursor-pointer hover:text-primary-500 transition-colors">
                                                     {getChatName(chat)}
                                                 </h3>
                                                 <span className="text-[10px] font-bold text-gray-400 uppercase tabular-nums">
                                                     {new Date(chat.updatedAt).toLocaleDateString([], { month: 'short', day: 'numeric' })}
                                                 </span>
                                             </div>
-                                            <p className="text-sm text-gray-500 dark:text-gray-400 truncate font-medium">
+                                            <p className="text-sm text-gray-500 truncate font-medium">
                                                 {chat.lastMessage ? (
                                                     <>
                                                         <span className="text-primary-500/70">{chat.lastMessage.sender._id === user._id ? 'You: ' : ''}</span>
@@ -166,7 +166,7 @@ const ArchivedChatsPage = () => {
                                         <div className="flex flex-col gap-2">
                                             <button 
                                                 onClick={() => handleUnarchive(chat._id)}
-                                                className="p-3 bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400 rounded-xl hover:bg-amber-100 dark:hover:bg-amber-900/40 transition-all font-bold text-xs flex items-center gap-2 group/btn"
+                                                className="p-3 bg-amber-50 text-amber-600 rounded-xl hover:bg-amber-100 transition-all font-bold text-xs flex items-center gap-2 group/btn"
                                                 title="Unarchive Chat"
                                             >
                                                 <Archive size={16} className="group-hover/btn:rotate-12 transition-transform" />
@@ -182,13 +182,13 @@ const ArchivedChatsPage = () => {
 
                 {/* Info Card */}
                 {archivedChats.length > 0 && (
-                    <div className="mt-12 p-6 bg-gradient-to-br from-amber-500/10 to-primary-500/5 rounded-[2.5rem] border border-amber-500/20 dark:border-amber-500/20 flex items-start gap-5 backdrop-blur-xl shadow-lg shadow-black/5">
-                        <div className="w-12 h-12 bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-400 rounded-2xl flex items-center justify-center shrink-0 shadow-inner">
+                    <div className="mt-12 p-6 bg-gradient-to-br from-amber-500/10 to-primary-500/5 rounded-[2.5rem] border border-amber-500/20 flex items-start gap-5 backdrop-blur-xl shadow-lg shadow-black/5">
+                        <div className="w-12 h-12 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center shrink-0 shadow-inner">
                             <Info size={24} />
                         </div>
                         <div className="space-y-1">
-                            <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase tracking-wider">About Archiving</h4>
-                            <p className="text-xs font-medium text-gray-500 dark:text-gray-400 leading-relaxed">
+                            <h4 className="text-sm font-black text-gray-900 uppercase tracking-wider">About Archiving</h4>
+                            <p className="text-xs font-medium text-gray-500 leading-relaxed">
                                 Archived chats will stay here as long as no new messages are received. Once a new message arrives, the chat will automatically jump back to your main list.
                             </p>
                         </div>

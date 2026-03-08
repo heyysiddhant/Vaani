@@ -1,28 +1,33 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary-50: oklch(0.98 0.01 260);
-  --color-primary-100: oklch(0.95 0.03 260);
-  --color-primary-200: oklch(0.88 0.07 260);
-  --color-primary-300: oklch(0.80 0.12 260);
-  --color-primary-400: oklch(0.70 0.17 260);
-  --color-primary-500: oklch(0.60 0.22 260);
-  --color-primary-600: oklch(0.52 0.20 260);
-  --color-primary-700: oklch(0.44 0.16 260);
-  --color-primary-800: oklch(0.35 0.12 260);
-  --color-primary-900: oklch(0.28 0.09 260);
-  
-  --color-gray-50: oklch(0.98 0.01 240);
-  --color-gray-100: oklch(0.96 0.01 240);
-  --color-gray-200: oklch(0.92 0.01 240);
-  --color-gray-300: oklch(0.86 0.02 240);
-  --color-gray-400: oklch(0.75 0.02 240);
-  --color-gray-500: oklch(0.60 0.02 240);
-  --color-gray-600: oklch(0.45 0.02 240);
-  --color-gray-700: oklch(0.35 0.02 240);
-  --color-gray-800: oklch(0.25 0.02 240);
-  --color-gray-900: oklch(0.18 0.02 240);
-  --color-gray-950: oklch(0.12 0.01 240);
+  --color-primary-50: oklch(0.95 0.05 340);
+  --color-primary-100: oklch(0.9 0.1 340);
+  --color-primary-200: oklch(0.85 0.15 340);
+  --color-primary-300: oklch(0.8 0.2 340);
+  --color-primary-400: oklch(0.7 0.25 340);
+  --color-primary-500: oklch(0.65 0.3 340);
+  /* Main Pink */
+  --color-primary-600: oklch(0.55 0.28 340);
+  --color-primary-700: oklch(0.45 0.25 340);
+  --color-primary-800: oklch(0.35 0.2 340);
+  --color-primary-900: oklch(0.25 0.15 340);
+  --color-primary-950: oklch(0.2 0.1 340);
+
+  /* Indigo/Purple Accent for Gradients */
+  --color-accent-500: oklch(0.5 0.25 280);
+
+  --color-gray-50: oklch(0.98 0.01 260);
+  --color-gray-100: oklch(0.95 0.01 260);
+  --color-gray-200: oklch(0.90 0.01 260);
+  --color-gray-300: oklch(0.80 0.01 260);
+  --color-gray-400: oklch(0.70 0.01 260);
+  --color-gray-500: oklch(0.60 0.01 260);
+  --color-gray-600: oklch(0.50 0.01 260);
+  --color-gray-700: oklch(0.40 0.01 260);
+  --color-gray-800: oklch(0.30 0.02 260);
+  --color-gray-900: oklch(0.20 0.03 260);
+  --color-gray-950: oklch(0.15 0.03 260);
 
   --font-sans: "Inter", system-ui, sans-serif;
 
@@ -32,16 +37,35 @@
   --animate-accordion-up: accordion-up 0.2s ease-out;
 
   @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-8px);
+    }
   }
+
   @keyframes accordion-down {
-    from { height: 0; }
-    to { height: var(--radix-accordion-content-height); }
+    from {
+      height: 0;
+    }
+
+    to {
+      height: var(--radix-accordion-content-height);
+    }
   }
+
   @keyframes accordion-up {
-    from { height: var(--radix-accordion-content-height); }
-    to { height: 0; }
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+
+    to {
+      height: 0;
+    }
   }
 }
 
@@ -51,19 +75,18 @@
   --accent: oklch(0.60 0.22 260);
 }
 
-.dark {
-  --background: oklch(0.12 0.01 240); /* Deep gray for modern dark mode */
-  --foreground: oklch(0.98 0.01 240);
-  --accent: oklch(0.70 0.17 260);
-}
+
 
 @layer base {
-  *, ::after, ::before {
-    @apply border-gray-200 dark:border-gray-800;
+
+  *,
+  ::after,
+  ::before {
+    @apply border-gray-200;
   }
 
   body {
-    @apply bg-[var(--background)] text-[var(--foreground)] selection:bg-primary-500/30 selection:text-primary-900 dark:selection:text-primary-50 antialiased;
+    @apply bg-[var(--background)] text-[var(--foreground)] selection:bg-primary-500/30 selection:text-primary-900 antialiased;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -72,17 +95,38 @@
 
 @layer utilities {
   .glass {
-    @apply bg-white/60 dark:bg-gray-900/60 backdrop-blur-2xl border border-white/40 dark:border-white/5 shadow-xl shadow-black/[0.03] dark:shadow-black/20;
+    @apply bg-white/30 backdrop-blur-[40px] border border-white/50;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
   }
+
   .glass-panel {
-    @apply bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border border-gray-200/50 dark:border-gray-800/50 shadow-sm;
+    @apply bg-white/50 border border-white/60 backdrop-blur-2xl;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
   }
+
+  .glass-sidebar {
+    @apply bg-white/40 backdrop-blur-3xl border-r border-white/20;
+  }
+
+  .glass-nav {
+    @apply bg-white/30 backdrop-blur-3xl border-r border-white/20;
+  }
+
   .glass-input {
-    @apply bg-gray-50/50 dark:bg-gray-900/50 backdrop-blur-md border border-gray-200/50 dark:border-gray-800/50 focus:bg-white dark:focus:bg-gray-900 transition-all;
+    @apply bg-white/70 backdrop-blur-xl border border-white/60 shadow-inner focus:ring-4 focus:ring-primary-500/20 focus:border-white transition-all text-gray-900;
+  }
+
+  .glass-bubble-outgoing {
+    @apply bg-gradient-to-r from-[#FF3B9D] to-[#8F2BFF] text-white border border-white/20;
+    box-shadow: 0 8px 20px -4px rgba(255, 59, 157, 0.5);
+  }
+
+  .glass-bubble-incoming {
+    @apply bg-white/60 backdrop-blur-xl text-gray-900 border border-white/60 shadow-sm shadow-black/5;
   }
 
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-br from-primary-500 to-indigo-600 dark:from-primary-400 dark:to-indigo-400;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#FF3B9D] to-[#8F2BFF];
   }
 }
 
@@ -97,5 +141,5 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-300 dark:bg-gray-700 rounded-full transition-colors hover:bg-gray-400 dark:hover:bg-gray-600;
+  @apply bg-gray-300 rounded-full transition-colors hover:bg-gray-400;
 }

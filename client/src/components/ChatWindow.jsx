@@ -249,16 +249,14 @@ const ChatWindow = () => {
 
     if (!selectedChat) {
         return (
-            <div className="hidden md:flex flex-1 flex-col items-center justify-center bg-gray-50/30 dark:bg-gray-950/30 transition-colors relative overflow-hidden">
-                <div className="absolute top-[20%] right-[20%] w-[30%] h-[30%] bg-primary-600/10 blur-[100px] rounded-full mix-blend-screen pointer-events-none" />
-                <div className="absolute bottom-[20%] left-[20%] w-[30%] h-[30%] bg-indigo-600/10 blur-[100px] rounded-full mix-blend-screen pointer-events-none" />
+            <div className="hidden md:flex flex-1 flex-col items-center justify-center relative overflow-hidden bg-transparent">
+                <div className="absolute top-[30%] right-[30%] w-[40%] h-[40%] bg-primary-600/20 blur-[120px] rounded-full mix-blend-screen pointer-events-none" />
+                <div className="absolute bottom-[20%] left-[20%] w-[30%] h-[30%] bg-accent-500/20 blur-[100px] rounded-full mix-blend-screen pointer-events-none" />
                 
-                <div className="text-center animate-subtle-float relative z-10">
-                    <div className="bg-white/50 dark:bg-gray-900/50 p-6 rounded-3xl inline-block mb-8 shadow-2xl shadow-primary-500/5 backdrop-blur-2xl border border-gray-200/50 dark:border-white/5">
-                        <MessageSquare size={56} className="text-primary-500 drop-shadow-sm" />
+                <div className="text-center animate-subtle-float relative z-10 flex flex-col items-center">
+                    <div className="glass-panel p-8 rounded-[2.5rem] inline-flex items-center justify-center mb-8">
+                        <MessageSquare size={64} className="text-primary-500 drop-shadow-[0_0_15px_rgba(255,59,157,0.5)]" />
                     </div>
-                    <h2 className="text-5xl font-black mb-4 tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-gray-900 to-gray-500 dark:from-white dark:to-gray-500">Vaani</h2>
-                    <p className="text-gray-500 font-medium tracking-wide text-lg">Select a conversation to start messaging</p>
                 </div>
             </div>
         );
@@ -269,65 +267,63 @@ const ChatWindow = () => {
     const onlineCount = selectedChat?.isGroup ? selectedChat.participants.filter(p => onlineUsers.includes(p._id.toString())).length : 0;
 
     return (
-        <div className="flex-1 flex flex-col h-full bg-gray-50/10 dark:bg-gray-950/10 overflow-hidden relative">
-            <div className="absolute top-0 right-0 w-[50%] h-[50%] bg-primary-600/5 blur-[120px] rounded-full mix-blend-screen pointer-events-none" />
-            
+        <div className="flex-1 flex flex-col h-full bg-transparent overflow-hidden relative border-l border-white/20">
             {/* Header */}
-            <div className="px-6 py-4 flex items-center justify-between border-b border-gray-200/50 dark:border-white/5 backdrop-blur-2xl bg-white/70 dark:bg-gray-900/70 z-20 shadow-sm transition-colors">
-                <div className="flex items-center gap-4">
-                    <button onClick={() => navigate('/dashboard')} className="md:hidden p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl transition-colors mr-1 border border-gray-200/50 dark:border-white/5 shadow-sm bg-white/50 dark:bg-gray-900/50">
-                        <ArrowLeft size={20} className="text-gray-600 dark:text-gray-400" />
+            <div className="px-4 sm:px-6 py-4 flex items-center justify-between z-20 transition-colors">
+                <div className="flex items-center gap-2 sm:gap-4 flex-1 min-w-0">
+                    <button onClick={() => navigate('/dashboard')} className="md:hidden p-2 hover:bg-white/20 rounded-xl transition-colors shrink-0 border border-white/20 shadow-sm bg-white/10 backdrop-blur-md">
+                        <ArrowLeft size={20} className="text-gray-800" />
                     </button>
                     
                     <div className="relative cursor-pointer group" onClick={() => handleViewProfile(null)}>
                         <img 
                             src={selectedChat?.isGroup ? (selectedChat.groupAvatar || `https://api.dicebear.com/7.x/initials/svg?seed=${selectedChat.groupName}`) : otherParticipant?.avatar} 
                             alt="Avatar" 
-                            className="w-12 h-12 rounded-full object-cover shadow-sm bg-white dark:bg-gray-800 ring-2 ring-transparent group-hover:ring-primary-500/50 transition-all" 
+                            className="w-12 h-12 rounded-full object-cover shadow-sm bg-white ring-2 ring-transparent group-hover:ring-primary-500/50 transition-all" 
                         />
                         {(!selectedChat?.isGroup && isOnline) && (
-                            <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-[3px] border-white dark:border-gray-900 rounded-full"></div>
+                            <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-[3px] border-white rounded-full"></div>
                         )}
                         {(selectedChat?.isGroup && onlineCount > 0) && (
-                            <div className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-[3px] border-white dark:border-gray-900 rounded-full flex items-center justify-center text-[8px] font-black text-white">
+                            <div className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-[3px] border-white rounded-full flex items-center justify-center text-[8px] font-black text-white">
                                 {onlineCount}
                             </div>
                         )}
                     </div>
                     
-                    <div className="flex flex-col">
-                        <h3 className="font-bold text-gray-900 dark:text-gray-100 text-lg leading-tight tracking-tight">
+                    <div className="flex flex-col flex-1 min-w-0">
+                        <h3 className="font-bold text-gray-900 text-base sm:text-lg leading-tight tracking-tight truncate">
                             {selectedChat?.isGroup ? selectedChat.groupName : otherParticipant?.name}
                         </h3>
                         <div className="flex items-center gap-1.5 mt-0.5">
-                            <span className={`w-1.5 h-1.5 rounded-full ${selectedChat?.isGroup ? (onlineCount > 0 ? 'bg-green-500' : 'bg-gray-400') : (isOnline ? 'bg-green-500' : 'bg-gray-400')}`}></span>
-                            <p className={`text-xs font-semibold ${selectedChat?.isGroup ? (onlineCount > 0 ? 'text-gray-600 dark:text-gray-300' : 'text-gray-500') : (isOnline ? 'text-gray-600 dark:text-gray-300' : 'text-gray-500')}`}>
+                            <span className={`w-2 h-2 rounded-full flex-shrink-0 ${selectedChat?.isGroup ? (onlineCount > 0 ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]' : 'bg-gray-400') : (isOnline ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]' : 'bg-gray-400')}`}></span>
+                            <p className={`text-[10px] sm:text-[11px] font-bold tracking-widest uppercase truncate ${selectedChat?.isGroup ? (onlineCount > 0 ? 'text-gray-700' : 'text-gray-500') : (isOnline ? 'text-gray-700' : 'text-gray-500')}`}>
                                 {selectedChat?.isGroup 
                                     ? (onlineCount > 0 ? `${onlineCount} online` : 'Offline')
-                                    : (isOnline ? 'Online now' : 'Offline')}
+                                    : (isOnline ? 'Online' : 'Offline')}
                             </p>
                         </div>
                     </div>
                 </div>
-                <div className="flex gap-2 text-gray-500 dark:text-gray-400">
+                <div className="flex gap-2 sm:gap-3 text-gray-800 shrink-0">
                     <button 
                         onClick={() => { setCallType('audio'); setIsCallModalOpen(true); }}
-                        className="p-2.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl hover:text-primary-600 transition-colors"
+                        className="px-2.5 sm:px-4 py-2 hover:bg-white/20 bg-white/40 backdrop-blur-md rounded-2xl hover:text-gray-900 transition-all border border-white/50 flex items-center gap-2 shadow-sm font-semibold text-sm"
                         title="Audio Call"
                     >
-                        <Phone size={20} />
+                        <Phone size={18} /> <span className="hidden sm:inline">Call</span>
                     </button>
                     <button 
                         onClick={() => { setCallType('video'); setIsCallModalOpen(true); }}
-                        className="p-2.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl hover:text-primary-600 transition-colors"
+                        className="px-2.5 sm:px-4 py-2 hover:bg-white/20 bg-white/40 backdrop-blur-md rounded-2xl hover:text-gray-900 transition-all border border-white/50 flex items-center gap-2 shadow-sm font-semibold text-sm"
                         title="Video Call"
                     >
-                        <Video size={20} />
+                        <Video size={18} /> <span className="hidden sm:inline">Video</span>
                     </button>
-                    <div className="relative">
-                        <button 
+                    <div className="relative flex items-center">
+                        <button  
                             onClick={() => setShowMenu(!showMenu)}
-                            className={`p-2.5 rounded-xl transition-colors ${showMenu ? 'bg-gray-200 dark:bg-gray-800 text-primary-600' : 'hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-primary-600'}`}
+                            className={`p-2 rounded-2xl transition-all ${showMenu ? 'bg-white/30 text-gray-900' : 'hover:bg-white/20 bg-transparent hover:text-gray-900'}`}
                             title="Menu"
                         >
                             <MoreVertical size={20} />
@@ -336,10 +332,10 @@ const ChatWindow = () => {
                         {showMenu && (
                             <>
                                 <div className="fixed inset-0 z-10" onClick={() => setShowMenu(false)}></div>
-                                <div className="absolute right-0 mt-2 w-48 bg-white/90 dark:bg-gray-900/90 backdrop-blur-2xl border border-gray-100 dark:border-white/10 rounded-2xl shadow-2xl z-20 p-1.5 animate-in fade-in zoom-in-95 duration-200">
+                                <div className="absolute right-0 mt-2 w-48 bg-white/90 backdrop-blur-2xl border border-gray-100 rounded-2xl shadow-2xl z-20 p-1.5 animate-in fade-in zoom-in-95 duration-200">
                                     <button
                                         onClick={handleClearChat}
-                                        className="w-full text-left px-3 py-2.5 text-sm font-semibold text-red-600 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-xl flex items-center gap-2.5 transition-colors"
+                                        className="w-full text-left px-3 py-2.5 text-sm font-semibold text-red-600 hover:bg-red-50 rounded-xl flex items-center gap-2.5 transition-colors"
                                     >
                                         <Trash2 size={16} />
                                         Clear Chat
@@ -354,24 +350,24 @@ const ChatWindow = () => {
             {/* Messages */}
             <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 z-10 scroll-smooth">
                 {messages.map((m) => (
-                    <div key={m._id} className={`flex items-end gap-3 animate-in slide-in-from-bottom-2 duration-300 group/msg ${m.sender._id === user._id ? 'flex-row-reverse' : 'flex-row'}`}>
+                    <div key={m._id} className={`flex items-end gap-2 sm:gap-3 w-full animate-in slide-in-from-bottom-2 duration-300 group/msg ${m.sender._id === user._id ? 'flex-row-reverse' : 'flex-row'}`}>
                         {m.sender._id !== user._id && (
                             <img 
                                 src={m.sender.avatar} 
                                 alt={m.sender.name}
-                                className="w-8 h-8 rounded-full object-cover cursor-pointer hover:opacity-80 transition-opacity shadow-sm mt-auto"
+                                className="w-7 h-7 sm:w-8 sm:h-8 rounded-full object-cover cursor-pointer hover:opacity-80 transition-opacity shadow-sm mt-auto shrink-0"
                                 onClick={() => handleViewProfile(m.sender)}
                             />
                         )}
-                        <div className={`relative max-w-[85%] sm:max-w-[70%] px-5 py-3.5 shadow-sm flex flex-col ${
+                        <div className={`relative max-w-[85%] sm:max-w-[75%] px-4 sm:px-5 py-3 sm:py-3.5 shadow-sm flex flex-col min-w-0 ${
                             m.sender._id === user._id 
-                            ? 'bg-gradient-to-br from-primary-600 to-indigo-600 text-white rounded-[1.5rem] rounded-br-sm shadow-primary-500/10' 
-                            : 'bg-white dark:bg-gray-900 border border-gray-100 dark:border-white/5 rounded-[1.5rem] rounded-bl-sm text-gray-900 dark:text-gray-100'
+                            ? 'glass-bubble-outgoing rounded-[1.5rem] rounded-br-md text-[14px] sm:text-[15px] font-medium' 
+                            : 'glass-bubble-incoming rounded-[1.5rem] rounded-bl-md text-[14px] sm:text-[15px] font-medium'
                         }`}>
                             {m.sender._id === user._id && !m.isDeleted && (
                                 <button 
                                     onClick={() => handleDeleteMessage(m._id)}
-                                    className="absolute -left-12 top-1/2 -translate-y-1/2 p-2.5 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md rounded-xl text-gray-400 hover:text-red-500 opacity-0 group-hover/msg:opacity-100 transition-all shadow-sm border border-gray-100 dark:border-white/10 scale-95 group-hover/msg:scale-100"
+                                    className="absolute -left-12 top-1/2 -translate-y-1/2 p-2.5 bg-white/90 backdrop-blur-md rounded-xl text-gray-400 hover:text-red-500 opacity-0 group-hover/msg:opacity-100 transition-all shadow-sm border border-gray-100 scale-95 group-hover/msg:scale-100"
                                 >
                                     <Trash2 size={16} />
                                 </button>
@@ -388,7 +384,7 @@ const ChatWindow = () => {
                                 </div>
                             )}
                             {m.messageType === 'file' && (
-                                <a href={m.mediaUrl} target="_blank" rel="noreferrer" className={`flex items-center gap-3 p-3 rounded-xl mb-3 font-medium text-sm transition-colors ${m.sender._id === user._id ? 'bg-white/10 hover:bg-white/20' : 'bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700'}`}>
+                                <a href={m.mediaUrl} target="_blank" rel="noreferrer" className={`flex items-center gap-3 p-3 rounded-xl mb-3 font-medium text-sm transition-colors ${m.sender._id === user._id ? 'bg-white/10 hover:bg-white/20' : 'bg-gray-50 hover:bg-gray-100'}`}>
                                     <FileText size={20} /> View Document
                                 </a>
                             )}
@@ -415,10 +411,10 @@ const ChatWindow = () => {
                             {typingUser && (
                                 <span className="text-[10px] text-gray-500 ml-2 font-bold uppercase tracking-wider">{typingUser} is typing...</span>
                             )}
-                            <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-white/5 py-4 px-5 rounded-2xl rounded-bl-sm w-fit shadow-sm">
+                            <div className="bg-white border border-gray-100 py-4 px-5 rounded-2xl rounded-bl-sm w-fit shadow-sm">
                                 <div className="flex gap-1.5">
-                                    <span className="w-2 h-2 bg-gray-300 dark:bg-gray-600 rounded-full animate-bounce"></span>
-                                    <span className="w-2 h-2 bg-gray-300 dark:bg-gray-600 rounded-full animate-bounce [animation-delay:0.2s]"></span>
+                                    <span className="w-2 h-2 bg-gray-300 rounded-full animate-bounce"></span>
+                                    <span className="w-2 h-2 bg-gray-300 rounded-full animate-bounce [animation-delay:0.2s]"></span>
                                     <span className="w-2 h-2 bg-primary-500 rounded-full animate-bounce [animation-delay:0.4s]"></span>
                                 </div>
                             </div>
@@ -428,65 +424,65 @@ const ChatWindow = () => {
                 <div ref={messagesEndRef} />
             </div>
 
-            {/* Input */}
-            <div className="p-4 sm:p-6 bg-transparent z-10 relative">
+            {/* Input Element */}
+            <div className="px-3 sm:px-6 py-4 sm:py-5 bg-transparent z-10 relative flex justify-center">
                 {selectedChat?.isDeleted ? (
-                    <div className="flex flex-col items-center justify-center py-5 px-8 text-center bg-white/50 dark:bg-gray-900/50 backdrop-blur-xl rounded-2xl border border-dashed border-gray-200 dark:border-gray-800 animate-in fade-in zoom-in-95 duration-500 shadow-sm">
-                        <div className="w-12 h-12 bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 rounded-full flex items-center justify-center mb-3">
-                            <AlertTriangle size={24} />
-                        </div>
-                        <h3 className="text-sm font-black text-gray-900 dark:text-white uppercase tracking-wider mb-1">Group Deleted</h3>
-                        <p className="text-xs font-medium text-gray-500 dark:text-gray-400 leading-relaxed max-w-xs">
-                            This group has been deleted by an admin. You can no longer send messages, images or files here.
+                    <div className="flex flex-col items-center justify-center p-4 text-center glass-panel w-full">
+                        <Trash2 size={24} className="text-gray-400 mb-2" />
+                        <h3 className="text-sm font-black text-gray-900 uppercase tracking-wider mb-1">Group Deleted</h3>
+                        <p className="text-[11px] font-bold text-gray-500 uppercase tracking-widest max-w-xs">
+                            This group has been deleted
                         </p>
                     </div>
                 ) : (
-                    <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-2xl border border-gray-200/50 dark:border-white/10 rounded-[2rem] p-2 shadow-lg shadow-black/5">
-                        <form onSubmit={handleSendMessage} className="flex items-center gap-2">
-                            <div className="flex gap-1 pl-2 text-gray-400">
-                                <button 
-                                    type="button" 
-                                    onClick={() => fileInputRef.current.click()}
-                                    className="p-2.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl hover:text-primary-600 transition-colors"
-                                    title="Attach File"
-                                >
-                                    <Image size={22} />
-                                </button>
-                                <input 
-                                    type="file" 
-                                    ref={fileInputRef} 
-                                    onChange={handleFileUpload} 
-                                    className="hidden" 
-                                    accept="image/*,application/pdf"
-                                />
-                            </div>
-                            <div className="flex-1 relative">
-                                <input
-                                    type="text"
-                                    placeholder="Type a message..."
-                                    className="w-full py-3.5 px-5 bg-transparent border-none focus:outline-none focus:ring-0 text-[15px] font-medium placeholder-gray-400 dark:placeholder-gray-500 text-gray-900 dark:text-white"
-                                    value={newMessage}
-                                    onChange={typingHandler}
-                                />
-                                <button 
-                                    type="button" 
-                                    onClick={() => setShowEmojiPicker(!showEmojiPicker)}
-                                    className="absolute right-3 top-[50%] -translate-y-[50%] p-2 rounded-xl text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-primary-600 transition-colors"
-                                >
-                                    <Smile size={20} />
-                                </button>
-                                {showEmojiPicker && (
-                                    <div className="absolute bottom-16 right-0 z-50 animate-in fade-in slide-in-from-bottom-2">
-                                        <EmojiPicker onEmojiClick={onEmojiClick} theme={document.documentElement.classList.contains('dark') ? 'dark' : 'light'} />
-                                    </div>
-                                )}
-                            </div>
+                    <div className="glass-panel rounded-full p-1.5 sm:p-2 pl-3 sm:pl-4 pr-1.5 sm:pr-2.5 shadow-xl shadow-black/5 w-full max-w-3xl flex items-center justify-between">
+                        <form onSubmit={handleSendMessage} className="flex items-center gap-1 sm:gap-2 w-full min-w-0">
+                            <button 
+                                type="button" 
+                                onClick={() => fileInputRef.current.click()}
+                                className="p-2 text-gray-500 hover:text-primary-500 transition-colors shrink-0"
+                                title="Attach File"
+                            >
+                                <Image size={20} className="sm:w-6 sm:h-6" />
+                            </button>
+                            <input 
+                                type="file" 
+                                ref={fileInputRef} 
+                                onChange={handleFileUpload} 
+                                className="hidden" 
+                                accept="image/*,application/pdf"
+                            />
+                            
+                            <input
+                                type="text"
+                                placeholder={`Message ${selectedChat?.isGroup ? selectedChat.groupName : otherParticipant?.name}...`}
+                                className="flex-1 min-w-0 bg-transparent border-none focus:outline-none focus:ring-0 text-[14px] sm:text-[15px] font-medium placeholder-gray-500/80 text-gray-900 px-1 sm:px-2 py-2.5 sm:py-3"
+                                value={newMessage}
+                                onChange={typingHandler}
+                            />
+
+                            <button 
+                                type="button" 
+                                onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+                                className="p-2 sm:mr-2 text-gray-500 hover:text-primary-500 transition-colors relative shrink-0"
+                            >
+                                <Smile size={20} className="sm:w-6 sm:h-6" />
+                            </button>
+                            
+                            {showEmojiPicker && (
+                                <div className="absolute bottom-20 right-10 z-50 animate-in fade-in slide-in-from-bottom-2">
+                                    <EmojiPicker onEmojiClick={onEmojiClick} theme={document.documentElement.classList.contains('dark') ? 'dark' : 'light'} />
+                                </div>
+                            )}
+
                             <button
                                 type="submit"
                                 disabled={!newMessage.trim()}
-                                className="bg-primary-600 hover:bg-primary-500 text-white p-3.5 rounded-[1.5rem] disabled:opacity-50 disabled:bg-gray-200 dark:disabled:bg-gray-800 disabled:text-gray-400 transition-all shadow-md active:scale-95"
+                                className="glass-bubble-outgoing hover:opacity-90 px-3 sm:px-6 py-2.5 sm:py-3.5 rounded-full disabled:opacity-50 disabled:grayscale transition-all active:scale-95 flex items-center justify-center font-bold tracking-wide shrink-0"
+                                title="Send"
                             >
-                                <Send size={20} />
+                                <Send size={18} className="sm:hidden -ml-0.5 -mt-0.5" />
+                                <span className="hidden sm:inline">Send</span>
                             </button>
                         </form>
                     </div>
