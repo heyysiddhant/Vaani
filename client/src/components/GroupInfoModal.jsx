@@ -170,20 +170,20 @@ const GroupInfoModal = ({ isOpen, onClose, chatData, onUpdate }) => {
                 onClick={onClose}
             ></div>
             
-            <div className="w-full max-w-md glass rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/20 bg-white dark:bg-gray-900 animate-in zoom-in-95 duration-300 relative z-10 flex flex-col max-h-[90vh]">
+            <div className="w-full max-w-md bg-white/60 dark:bg-gray-900/50 backdrop-blur-3xl rounded-[2.5rem] overflow-hidden shadow-2xl shadow-black/10 border border-white/40 dark:border-white/5 animate-in zoom-in-95 duration-300 relative z-10 flex flex-col max-h-[90vh]">
                 {/* Close Button */}
                 <button 
                     onClick={onClose}
-                    className="absolute top-6 right-6 p-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full transition-colors z-20 text-gray-500"
+                    className="absolute top-6 right-6 p-2 bg-white/50 dark:bg-gray-800/50 hover:bg-white/80 dark:hover:bg-gray-700/50 rounded-full transition-colors z-20 text-gray-700 dark:text-gray-300 backdrop-blur-md"
                 >
                     <X size={20} />
                 </button>
 
                 {/* Header/Avatar Section */}
-                <div className="relative h-48 bg-linear-to-br from-primary-500 to-primary-700 flex flex-col items-center justify-center flex-shrink-0">
-                    <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
+                <div className="relative h-48 bg-gradient-to-br from-primary-500/20 via-indigo-500/10 to-transparent flex flex-col items-center justify-center flex-shrink-0">
+                    <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary-500 via-transparent to-transparent"></div>
                     <div className="relative group">
-                        <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-white shadow-2xl bg-gray-100">
+                        <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-white/60 dark:border-gray-800/60 shadow-xl bg-gray-100">
                             <img 
                                 src={isEditing ? avatar : chatData.groupAvatar || `https://api.dicebear.com/7.x/initials/svg?seed=${chatData.groupName}`} 
                                 alt={chatData.groupName} 
@@ -226,7 +226,7 @@ const GroupInfoModal = ({ isOpen, onClose, chatData, onUpdate }) => {
                                 type="text"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
-                                className="w-full text-2xl font-black text-center bg-gray-50 dark:bg-gray-800 border-none rounded-xl focus:ring-2 focus:ring-primary-500 py-2"
+                                className="w-full text-2xl font-black text-center bg-white/50 dark:bg-gray-950/50 border border-white/40 dark:border-white/5 shadow-inner rounded-xl focus:ring-4 focus:ring-primary-500/10 focus:border-primary-400 py-2 text-gray-900 dark:text-white transition-all"
                                 placeholder="Group Name"
                             />
                         ) : (
@@ -241,7 +241,7 @@ const GroupInfoModal = ({ isOpen, onClose, chatData, onUpdate }) => {
 
                     <div className="space-y-4">
                         {/* Description */}
-                        <div className="flex items-start gap-4 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-2xl border border-gray-100 dark:border-gray-800">
+                        <div className="flex items-start gap-4 p-4 bg-white/40 dark:bg-gray-950/40 rounded-2xl border border-white/40 dark:border-white/5 shadow-sm">
                             <div className="mt-1 text-primary-600 dark:text-primary-400">
                                 <FileText size={18} />
                             </div>
@@ -251,11 +251,11 @@ const GroupInfoModal = ({ isOpen, onClose, chatData, onUpdate }) => {
                                     <textarea 
                                         value={description}
                                         onChange={(e) => setDescription(e.target.value)}
-                                        className="w-full text-sm font-medium bg-transparent border-none focus:ring-0 p-0 resize-none h-20"
+                                        className="w-full text-sm font-medium bg-white/50 dark:bg-gray-950/50 border border-white/40 dark:border-white/5 rounded-xl focus:ring-4 focus:ring-primary-500/10 p-3 resize-none h-24 text-gray-900 dark:text-white shadow-inner transition-all mt-1"
                                         placeholder="Add a description..."
                                     />
                                 ) : (
-                                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400 leading-relaxed italic">
+                                    <p className="text-sm font-medium text-gray-700 dark:text-gray-300 leading-relaxed italic">
                                         "{chatData.groupDescription || 'No description provided.'}"
                                     </p>
                                 )}
@@ -287,7 +287,7 @@ const GroupInfoModal = ({ isOpen, onClose, chatData, onUpdate }) => {
                                             value={memberSearch}
                                             onChange={handleSearch}
                                             placeholder="Search users to add..."
-                                            className="w-full pl-9 pr-4 py-2 text-xs bg-gray-50 dark:bg-gray-800 border-none rounded-xl focus:ring-2 focus:ring-primary-500"
+                                            className="w-full pl-9 pr-4 py-3 text-sm bg-white/50 dark:bg-gray-950/50 border border-white/40 dark:border-white/5 rounded-xl focus:ring-4 focus:ring-primary-500/10 focus:border-primary-400 shadow-inner text-gray-900 dark:text-white transition-all"
                                             autoFocus
                                         />
                                     </div>
@@ -321,7 +321,7 @@ const GroupInfoModal = ({ isOpen, onClose, chatData, onUpdate }) => {
                                     const isUserAdmin = chatData.groupAdmin._id === participant._id;
                                     
                                     return (
-                                        <div key={participant._id} className="flex items-center justify-between p-3 bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800/50 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group/member">
+                                            <div key={participant._id} className="flex items-center justify-between p-3 bg-white/40 dark:bg-gray-950/40 rounded-2xl border border-white/40 dark:border-white/5 hover:bg-white/60 dark:hover:bg-gray-900/60 shadow-sm transition-colors group/member">
                                             <div className="flex items-center gap-3">
                                                 <div className="relative">
                                                     <img 
@@ -359,16 +359,16 @@ const GroupInfoModal = ({ isOpen, onClose, chatData, onUpdate }) => {
                 </div>
 
                 {/* Footer Actions */}
-                <div className="p-6 pt-0 border-t border-gray-100 dark:border-gray-800 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm flex-shrink-0">
+                <div className="p-6 pt-0 border-t border-white/40 dark:border-white/5 bg-transparent flex-shrink-0">
                     <div className="flex gap-3 mt-4">
                         {isAdmin && !chatData.isDeleted && (
                             <button
                                 onClick={() => isEditing ? handleUpdate() : setIsEditing(true)}
                                 disabled={isUpdating}
-                                className={`flex-1 py-4 flex items-center justify-center gap-2 rounded-2xl font-black shadow-xl transition-all transform active:scale-95 ${
+                                className={`flex-1 py-4 flex items-center justify-center gap-2 rounded-2xl font-black shadow-lg transition-all transform active:scale-[0.98] ${
                                     isEditing 
-                                    ? 'bg-primary-600 hover:bg-primary-700 text-white' 
-                                    : 'bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300'
+                                    ? 'bg-gradient-to-br from-primary-500 to-indigo-600 hover:from-primary-400 hover:to-indigo-500 text-white shadow-primary-500/25 border border-white/10' 
+                                    : 'bg-white/50 dark:bg-gray-800/50 hover:bg-white/80 dark:hover:bg-gray-700/50 text-gray-800 dark:text-gray-200 border border-white/40 dark:border-white/5'
                                 }`}
                             >
                                 {isUpdating ? <Loader2 size={18} className="animate-spin" /> : (isEditing ? <Save size={18} /> : <Edit2 size={18} />)}
@@ -379,7 +379,7 @@ const GroupInfoModal = ({ isOpen, onClose, chatData, onUpdate }) => {
                             <button
                                 onClick={handleDeleteGroup}
                                 disabled={isUpdating}
-                                className="flex-1 py-4 bg-red-50 dark:bg-red-950/20 text-red-600 rounded-2xl font-black transition-all hover:bg-red-100 dark:hover:bg-red-900/40 flex items-center justify-center gap-2"
+                                className="flex-1 py-4 bg-red-500/10 text-red-600 dark:text-red-400 rounded-2xl font-black transition-all hover:bg-red-500/20 border border-red-500/20 flex items-center justify-center gap-2"
                             >
                                 <Trash2 size={18} />
                                 Delete Group
@@ -393,7 +393,7 @@ const GroupInfoModal = ({ isOpen, onClose, chatData, onUpdate }) => {
                                     setDescription(chatData.groupDescription);
                                     setAvatar(chatData.groupAvatar);
                                 }}
-                                className="px-6 py-4 bg-red-50 dark:bg-red-900/20 text-red-600 rounded-2xl font-black transition-all hover:bg-red-100 dark:hover:bg-red-900/40"
+                                className="px-6 py-4 bg-gray-500/10 text-gray-600 dark:text-gray-400 rounded-2xl font-black transition-all hover:bg-gray-500/20 border border-gray-500/20"
                             >
                                 Cancel
                             </button>
@@ -402,7 +402,7 @@ const GroupInfoModal = ({ isOpen, onClose, chatData, onUpdate }) => {
                     {!isEditing && (
                         <button
                             onClick={onClose}
-                            className="w-full mt-3 py-4 bg-gray-900 dark:bg-gray-800 hover:bg-black dark:hover:bg-gray-700 text-white rounded-2xl font-black shadow-xl transition-all transform active:scale-95"
+                            className="w-full mt-3 py-4 bg-gradient-to-br from-gray-900 to-black dark:from-white dark:to-gray-200 text-white dark:text-gray-900 rounded-2xl font-black shadow-xl shadow-black/10 transition-all transform active:scale-[0.98] border border-gray-800 dark:border-white/20"
                         >
                             Close Details
                         </button>

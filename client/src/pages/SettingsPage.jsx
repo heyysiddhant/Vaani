@@ -214,24 +214,30 @@ const SettingsPage = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-950 transition-colors">
+        <div className="min-h-screen bg-gray-50/30 dark:bg-gray-950/30 transition-colors relative overflow-hidden">
+            <div className="absolute top-[10%] left-[10%] w-[40%] h-[40%] bg-primary-600/5 blur-[120px] rounded-full mix-blend-screen pointer-events-none" />
+            <div className="absolute bottom-[20%] right-[10%] w-[30%] h-[30%] bg-indigo-600/5 blur-[120px] rounded-full mix-blend-screen pointer-events-none" />
+
             {/* Nav Header */}
-            <div className="sticky top-0 z-40 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border-b border-gray-100 dark:border-gray-800">
-                <div className="max-w-4xl mx-auto px-4 h-16 flex items-center gap-4">
+            <div className="sticky top-0 z-40 bg-white/70 dark:bg-gray-900/70 backdrop-blur-2xl border-b border-gray-200/50 dark:border-white/5">
+                <div className="max-w-4xl mx-auto px-6 h-20 flex items-center gap-6">
                     <button 
                         onClick={() => navigate('/dashboard')}
-                        className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors text-gray-500"
+                        className="p-3 bg-white/50 dark:bg-gray-800/50 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-2xl transition-all border border-gray-200/50 dark:border-white/5 shadow-sm text-gray-500 hover:text-gray-900 dark:hover:text-white group"
                     >
-                        <ArrowLeft size={20} />
+                        <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
                     </button>
-                    <h1 className="text-lg font-black text-gray-900 dark:text-white uppercase tracking-wider">Settings</h1>
+                    <div>
+                        <h1 className="text-xl font-black text-gray-900 dark:text-white uppercase tracking-wider">Settings</h1>
+                        <p className="text-[10px] font-bold text-primary-500 uppercase tracking-[0.2em]">Manage your account</p>
+                    </div>
                 </div>
             </div>
 
-            <main className="max-w-4xl mx-auto p-4 md:p-8 space-y-8">
+            <main className="max-w-4xl mx-auto p-4 md:p-8 space-y-8 relative z-10">
                 {/* Profile Card */}
-                <section className="glass rounded-[2rem] overflow-hidden shadow-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900/50">
-                    <div className="p-8 border-b border-gray-50 dark:border-gray-800 bg-linear-to-br from-gray-50 to-white dark:from-gray-800/20 dark:to-transparent">
+                <section className="bg-white/60 dark:bg-gray-900/50 backdrop-blur-2xl rounded-[2.5rem] overflow-hidden shadow-2xl shadow-black/5 border border-gray-200/50 dark:border-white/5">
+                    <div className="p-8 border-b border-gray-200/50 dark:border-white/5 bg-gradient-to-br from-white/50 to-transparent dark:from-white/5 dark:to-transparent">
                         <div className="flex flex-col md:flex-row items-center gap-8">
                             {/* Avatar Section */}
                             <div className="relative group">
@@ -275,7 +281,7 @@ const SettingsPage = () => {
                                     </label>
                                     <input 
                                         type="text" 
-                                        className="w-full px-5 py-4 bg-gray-50 dark:bg-gray-800 border-none rounded-2xl focus:ring-4 focus:ring-primary-500/20 transition-all dark:text-white"
+                                        className="w-full px-5 py-4 bg-white/50 dark:bg-gray-950/50 border border-gray-200/80 dark:border-white/5 rounded-2xl focus:ring-4 focus:ring-primary-500/10 focus:border-primary-400 dark:focus:border-primary-500/50 transition-all text-gray-900 dark:text-white shadow-sm"
                                         value={name}
                                         onChange={(e) => setName(e.target.value)}
                                         required
@@ -287,7 +293,7 @@ const SettingsPage = () => {
                                     </label>
                                     <input 
                                         type="email" 
-                                        className="w-full px-5 py-4 bg-gray-50 dark:bg-gray-800 border-none rounded-2xl opacity-50 cursor-not-allowed dark:text-white"
+                                        className="w-full px-5 py-4 bg-white/30 dark:bg-gray-950/30 border border-gray-200/50 dark:border-white/5 rounded-2xl opacity-60 cursor-not-allowed text-gray-900 dark:text-white shadow-sm"
                                         value={user?.email}
                                         disabled
                                     />
@@ -307,7 +313,7 @@ const SettingsPage = () => {
                                     </div>
                                     <textarea 
                                         rows="3"
-                                        className="w-full px-5 py-4 bg-gray-50 dark:bg-gray-800 border-none rounded-2xl focus:ring-4 focus:ring-primary-500/20 transition-all dark:text-white resize-none text-sm"
+                                        className="w-full px-5 py-4 bg-white/50 dark:bg-gray-950/50 border border-gray-200/80 dark:border-white/5 rounded-2xl focus:ring-4 focus:ring-primary-500/10 focus:border-primary-400 dark:focus:border-primary-500/50 transition-all text-gray-900 dark:text-white resize-none text-sm shadow-sm"
                                         placeholder="Tell us about yourself..."
                                         value={bio}
                                         onChange={(e) => setBio(e.target.value.slice(0, 51))}
@@ -317,7 +323,7 @@ const SettingsPage = () => {
                                 <button 
                                     type="submit"
                                     disabled={isSavingProfile}
-                                    className="w-full px-10 py-4 bg-linear-to-br from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 text-white rounded-2xl font-black shadow-2xl shadow-primary-500/30 transition-all transform active:scale-95 flex items-center justify-center gap-3 disabled:opacity-50"
+                                    className="w-full px-10 py-4 bg-gradient-to-br from-primary-500 to-indigo-600 hover:from-primary-400 hover:to-indigo-500 text-white rounded-2xl font-black shadow-lg shadow-primary-500/25 transition-all transform active:scale-[0.98] flex items-center justify-center gap-3 disabled:opacity-50 border border-white/10"
                                 >
                                     {isSavingProfile ? <Loader2 className="animate-spin" size={20} /> : <Check size={20} />}
                                     Update Profile
@@ -328,7 +334,7 @@ const SettingsPage = () => {
                 </section>
 
                 {/* Security Section */}
-                <section className="glass rounded-[2rem] overflow-hidden shadow-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900/50 p-8">
+                <section className="bg-white/60 dark:bg-gray-900/50 backdrop-blur-2xl rounded-[2.5rem] overflow-hidden shadow-2xl shadow-black/5 border border-gray-200/50 dark:border-white/5 p-8 md:p-10">
                     <div className="flex items-center gap-4 mb-8">
                         <div className="w-12 h-12 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-2xl flex items-center justify-center shadow-lg shadow-red-500/10">
                             <ShieldCheck size={24} />
@@ -344,7 +350,7 @@ const SettingsPage = () => {
                             <input 
                                 type="password" 
                                 placeholder="Current Password"
-                                className="w-full px-5 py-4 bg-gray-50 dark:bg-gray-800 border-none rounded-2xl focus:ring-4 focus:ring-primary-500/20 transition-all dark:text-white"
+                                className="w-full px-5 py-4 bg-white/50 dark:bg-gray-950/50 border border-gray-200/80 dark:border-white/5 rounded-2xl focus:ring-4 focus:ring-primary-500/10 focus:border-primary-400 dark:focus:border-primary-500/50 transition-all text-gray-900 dark:text-white shadow-sm"
                                 value={currentPassword}
                                 onChange={(e) => setCurrentPassword(e.target.value)}
                                 required
@@ -353,7 +359,7 @@ const SettingsPage = () => {
                                 <input 
                                     type="password" 
                                     placeholder="New Password"
-                                    className="w-full px-5 py-4 bg-gray-50 dark:bg-gray-800 border-none rounded-2xl focus:ring-4 focus:ring-primary-500/20 transition-all dark:text-white"
+                                    className="w-full px-5 py-4 bg-white/50 dark:bg-gray-950/50 border border-gray-200/80 dark:border-white/5 rounded-2xl focus:ring-4 focus:ring-primary-500/10 focus:border-primary-400 dark:focus:border-primary-500/50 transition-all text-gray-900 dark:text-white shadow-sm"
                                     value={newPassword}
                                     onChange={(e) => setNewPassword(e.target.value)}
                                     required
@@ -361,7 +367,7 @@ const SettingsPage = () => {
                                 <input 
                                     type="password" 
                                     placeholder="Confirm New"
-                                    className="w-full px-5 py-4 bg-gray-50 dark:bg-gray-800 border-none rounded-2xl focus:ring-4 focus:ring-primary-500/20 transition-all dark:text-white"
+                                    className="w-full px-5 py-4 bg-white/50 dark:bg-gray-950/50 border border-gray-200/80 dark:border-white/5 rounded-2xl focus:ring-4 focus:ring-primary-500/10 focus:border-primary-400 dark:focus:border-primary-500/50 transition-all text-gray-900 dark:text-white shadow-sm"
                                     value={confirmPassword}
                                     onChange={(e) => setConfirmPassword(e.target.value)}
                                     required
@@ -372,7 +378,7 @@ const SettingsPage = () => {
                         <button 
                             type="submit"
                             disabled={isSavingPassword}
-                            className="w-full py-4 bg-gray-900 dark:bg-gray-800 hover:bg-black dark:hover:bg-gray-700 text-white rounded-2xl font-black shadow-xl transition-all transform active:scale-95 disabled:opacity-50 flex items-center justify-center gap-3"
+                            className="w-full py-4 bg-gradient-to-br from-gray-900 to-black dark:from-white dark:to-gray-200 text-white dark:text-gray-900 rounded-2xl font-black shadow-xl shadow-black/10 transition-all transform active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-3 border border-gray-800 dark:border-white/20"
                         >
                             {isSavingPassword ? <Loader2 className="animate-spin" size={20} /> : <Lock size={20} />}
                             Update Password
@@ -381,7 +387,7 @@ const SettingsPage = () => {
                 </section>
 
                 {/* Danger Zone Section */}
-                <section className="glass rounded-[2rem] overflow-hidden shadow-2xl border border-red-100/50 dark:border-red-900/20 bg-white dark:bg-red-950/20 p-8">
+                <section className="bg-red-50/50 dark:bg-red-950/10 backdrop-blur-2xl rounded-[2.5rem] overflow-hidden shadow-2xl shadow-black/5 border border-red-200/50 dark:border-red-900/30 p-8 md:p-10">
                     <div className="flex items-center gap-4 mb-8">
                         <div className="w-12 h-12 bg-red-100 dark:bg-red-950 text-red-600 dark:text-red-500 rounded-2xl flex items-center justify-center shadow-lg shadow-red-500/10">
                             <ShieldAlert size={24} />
@@ -420,7 +426,7 @@ const SettingsPage = () => {
                                     <input 
                                         type="password" 
                                         placeholder="Type password..."
-                                        className="w-full px-5 py-4 bg-gray-50 dark:bg-gray-800 border-none rounded-2xl focus:ring-4 focus:ring-red-500/10 transition-all dark:text-white"
+                                        className="w-full px-5 py-4 bg-white/80 dark:bg-gray-950/80 border border-red-200/50 dark:border-red-900/50 rounded-2xl focus:ring-4 focus:ring-red-500/10 focus:border-red-400 dark:focus:border-red-500/50 transition-all text-gray-900 dark:text-white shadow-sm"
                                         value={deletePassword}
                                         onChange={(e) => setDeletePassword(e.target.value)}
                                         required
@@ -431,7 +437,7 @@ const SettingsPage = () => {
                                     <input 
                                         type="password" 
                                         placeholder="Confirm..."
-                                        className="w-full px-5 py-4 bg-gray-50 dark:bg-gray-800 border-none rounded-2xl focus:ring-4 focus:ring-red-500/10 transition-all dark:text-white"
+                                        className="w-full px-5 py-4 bg-white/80 dark:bg-gray-950/80 border border-red-200/50 dark:border-red-900/50 rounded-2xl focus:ring-4 focus:ring-red-500/10 focus:border-red-400 dark:focus:border-red-500/50 transition-all text-gray-900 dark:text-white shadow-sm"
                                         value={deleteConfirmPassword}
                                         onChange={(e) => setDeleteConfirmPassword(e.target.value)}
                                         required

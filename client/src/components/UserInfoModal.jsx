@@ -11,20 +11,20 @@ const UserInfoModal = ({ isOpen, onClose, userData }) => {
                 onClick={onClose}
             ></div>
             
-            <div className="w-full max-w-sm glass rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/20 bg-white dark:bg-gray-900 animate-in zoom-in-95 duration-300 relative z-10">
+            <div className="w-full max-w-sm bg-white/60 dark:bg-gray-900/50 backdrop-blur-3xl rounded-[2.5rem] overflow-hidden shadow-2xl shadow-black/10 border border-white/40 dark:border-white/5 animate-in zoom-in-95 duration-300 relative z-10">
                 {/* Close Button */}
                 <button 
                     onClick={onClose}
-                    className="absolute top-6 right-6 p-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full transition-colors z-20 text-gray-500"
+                    className="absolute top-6 right-6 p-2 bg-white/50 dark:bg-gray-800/50 hover:bg-white/80 dark:hover:bg-gray-700/50 rounded-full transition-colors z-20 text-gray-700 dark:text-gray-300 backdrop-blur-md"
                 >
                     <X size={20} />
                 </button>
 
                 {/* Header/Avatar Section */}
-                <div className="relative h-48 bg-linear-to-br from-primary-500 to-primary-700 flex items-center justify-center">
-                    <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
+                <div className="relative h-48 bg-gradient-to-br from-primary-500/20 via-indigo-500/10 to-transparent flex items-center justify-center">
+                    <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary-500 via-transparent to-transparent"></div>
                     <div className="relative group">
-                        <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-2xl bg-gray-100">
+                        <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white/60 dark:border-gray-800/60 shadow-xl bg-gray-100">
                             <img 
                                 src={userData.avatar} 
                                 alt={userData.name} 
@@ -46,17 +46,17 @@ const UserInfoModal = ({ isOpen, onClose, userData }) => {
                     </div>
 
                     <div className="space-y-4">
-                        <div className="flex items-start gap-4 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-2xl border border-gray-100 dark:border-gray-800">
+                        <div className="flex items-start gap-4 p-4 bg-white/40 dark:bg-gray-950/40 rounded-2xl border border-white/40 dark:border-white/5 shadow-sm">
                             <div className="mt-1 text-primary-600 dark:text-primary-400">
                                 <Mail size={18} />
                             </div>
                             <div className="flex-1">
-                                <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-0.5">Email Address</p>
-                                <p className="text-sm font-bold text-gray-700 dark:text-gray-300">{userData.email || 'Private'}</p>
+                                <p className="text-[10px] font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-0.5">Email Address</p>
+                                <p className="text-sm font-bold text-gray-900 dark:text-gray-100">{userData.email || 'Private'}</p>
                             </div>
                         </div>
 
-                        <div className="flex items-start gap-4 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-2xl border border-gray-100 dark:border-gray-800">
+                        <div className="flex items-start gap-4 p-4 bg-white/40 dark:bg-gray-950/40 rounded-2xl border border-white/40 dark:border-white/5 shadow-sm">
                             <div className="mt-1 text-primary-600 dark:text-primary-400">
                                 <FileText size={18} />
                             </div>
@@ -71,7 +71,7 @@ const UserInfoModal = ({ isOpen, onClose, userData }) => {
 
                     <button
                         onClick={onClose}
-                        className="w-full py-4 bg-gray-900 dark:bg-gray-800 hover:bg-black dark:hover:bg-gray-700 text-white rounded-2xl font-black shadow-xl transition-all transform active:scale-95"
+                        className="w-full py-4 bg-gradient-to-br from-gray-900 to-black dark:from-white dark:to-gray-200 text-white dark:text-gray-900 rounded-2xl font-black shadow-xl shadow-black/10 transition-all transform active:scale-[0.98] border border-gray-800 dark:border-white/20"
                     >
                         Close Profile
                     </button>

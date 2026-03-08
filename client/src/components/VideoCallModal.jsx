@@ -182,8 +182,8 @@ const VideoCallModal = ({ isOpen, onClose, remoteUser, isIncoming, incomingSigna
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-md p-0 md:p-4 animate-in fade-in duration-300">
-            <div className="relative bg-gray-950 w-full h-full md:max-w-5xl md:h-[85vh] md:rounded-3xl shadow-2xl flex flex-col overflow-hidden">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-2xl p-0 md:p-4 animate-in fade-in duration-300">
+            <div className="relative bg-gray-950 w-full h-full md:max-w-5xl md:h-[85vh] md:rounded-[2.5rem] shadow-2xl shadow-black flex flex-col overflow-hidden border border-white/10">
                 
                 {/* Header Info (Mobile Friendly) */}
                 <div className="absolute top-6 left-6 z-20 flex items-center gap-4">

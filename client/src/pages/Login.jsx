@@ -22,41 +22,47 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen grid lg:grid-cols-2 bg-[#0B0F1A] text-white transition-colors">
+    <div className="min-h-screen grid lg:grid-cols-2 bg-gray-950 text-white transition-colors relative selection:bg-primary-500/30">
       
+      {/* Background ambient lighting */}
+      <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-600/20 blur-[120px] rounded-full mix-blend-screen pointer-events-none" />
+      <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary-600/20 blur-[120px] rounded-full mix-blend-screen pointer-events-none" />
+
       {/* Left Brand Panel */}
-      <div className="hidden lg:flex flex-col justify-between p-12 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#6D5CFF]/20 via-transparent to-[#F3B8FF]/20" />
+      <div className="hidden lg:flex flex-col justify-between p-12 relative z-10 overflow-hidden border-r border-white/5 bg-gray-900/40 backdrop-blur-3xl lg:order-2">
         <div className="relative z-10">
-          <div className="flex items-center gap-3 mb-12">
-            <img src={logo} alt="Vaani Logo" className="w-12 h-12 rounded-2xl shadow-xl object-cover" />
-            <span className="text-xl font-black tracking-tight">Vaani</span>
+          <div className="flex items-center gap-3 mb-16 animate-in slide-in-from-top-6 fade-in duration-1000">
+            <div className="p-3 bg-white/5 rounded-2xl border border-white/10 shadow-2xl backdrop-blur-md">
+                <img src={logo} alt="Vaani Logo" className="w-10 h-10 object-cover" />
+            </div>
+            <span className="text-2xl font-black tracking-tighter text-gradient">Vaani</span>
           </div>
 
-          <h1 className="text-5xl font-black leading-tight tracking-tight mb-6">
+          <h1 className="text-5xl font-black leading-[1.1] tracking-tighter mb-6 text-transparent bg-clip-text bg-gradient-to-br from-white to-white/60 animate-in slide-in-from-right-8 fade-in duration-1000 delay-150">
             Conversations <br /> that feel alive.
           </h1>
 
-          <p className="text-white/70 max-w-md text-lg">
-            Vaani is building the future of social communication — private, fast,
-            expressive, and human.
+          <p className="text-gray-400 max-w-md text-lg leading-relaxed font-medium animate-in slide-in-from-right-8 fade-in duration-1000 delay-300">
+            Vaani is building the future of social communication — private, fast, expressive, and deeply human.
           </p>
         </div>
 
-        <div className="relative z-10 text-white/40 text-sm">
-          © {new Date().getFullYear()} Vaani • Crafted for the world
+        <div className="relative z-10 text-gray-500 text-sm font-medium tracking-wide animate-in fade-in duration-1000 delay-500">
+          © {new Date().getFullYear()} Vaani • Designed for the future
         </div>
       </div>
 
       {/* Right Login Panel */}
-      <div className="flex items-center justify-center px-4 sm:px-8">
-        <div className="w-full max-w-md space-y-8 animate-in fade-in slide-in-from-bottom-6 duration-700">
+      <div className="flex items-center justify-center px-4 sm:px-12 lg:px-24 relative z-10 lg:order-1">
+        <div className="w-full max-w-md space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-100">
 
           {/* Mobile Brand */}
-          <div className="lg:hidden text-center">
-            <img src={logo} alt="Vaani Logo" className="w-16 h-16 rounded-2xl shadow-xl object-cover mx-auto mb-4" />
-            <h2 className="text-4xl font-black tracking-tight">Welcome back</h2>
-            <p className="text-white/60 mt-2 text-sm">
+          <div className="lg:hidden text-center mb-8">
+            <div className="mx-auto w-16 h-16 p-3 bg-white/5 rounded-2xl border border-white/10 shadow-2xl backdrop-blur-md mb-6 inline-flex items-center justify-center">
+                <img src={logo} alt="Vaani Logo" className="w-full h-full object-cover" />
+            </div>
+            <h2 className="text-4xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white to-white/60">Welcome back</h2>
+            <p className="text-gray-400 mt-2 text-sm font-medium">
               Sign in to continue your conversations
             </p>
           </div>
@@ -64,50 +70,58 @@ const Login = () => {
           {/* Glass Card */}
           <form
             onSubmit={handleSubmit}
-            className="relative rounded-3xl p-8 sm:p-10 backdrop-blur-xl bg-white/5 border border-white/10 shadow-2xl"
+            className="relative rounded-[2rem] p-8 sm:p-10 bg-gray-900/40 backdrop-blur-2xl border border-white/10 shadow-2xl shadow-black/50"
           >
             <div className="space-y-5">
-              <div>
-                <label className="text-[11px] font-black text-white/40 uppercase tracking-widest ml-1">
-                  Email
+              <div className="group">
+                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4 mb-1.5 block group-focus-within:text-primary-400 transition-colors">
+                  Email Address
                 </label>
-                <input
-                  type="email"
-                  required
-                  className="mt-1 w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-[#6D5CFF] focus:ring-2 focus:ring-[#6D5CFF]/40 outline-none transition text-sm"
-                  placeholder="name@example.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
+                <div className="relative">
+                    <input
+                    type="email"
+                    required
+                    className="w-full px-5 py-3.5 rounded-2xl bg-gray-950/50 border border-white/5 focus:border-primary-500/50 focus:bg-gray-900 focus:ring-4 focus:ring-primary-500/10 outline-none transition-all text-sm font-medium text-white placeholder-gray-600"
+                    placeholder="name@example.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    />
+                </div>
               </div>
 
-              <div>
-                <label className="text-[11px] font-black text-white/40 uppercase tracking-widest ml-1">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  required
-                  className="mt-1 w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-[#6D5CFF] focus:ring-2 focus:ring-[#6D5CFF]/40 outline-none transition text-sm"
-                  placeholder="••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
+              <div className="group">
+                <div className="flex justify-between items-center ml-4 mb-1.5 ">
+                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block group-focus-within:text-primary-400 transition-colors">
+                    Password
+                    </label>
+                    <a href="#" className="text-[10px] font-bold text-primary-400 hover:text-primary-300 transition-colors">Forgot?</a>
+                </div>
+                
+                <div className="relative">
+                    <input
+                    type="password"
+                    required
+                    className="w-full px-5 py-3.5 rounded-2xl bg-gray-950/50 border border-white/5 focus:border-primary-500/50 focus:bg-gray-900 focus:ring-4 focus:ring-primary-500/10 outline-none transition-all text-sm font-medium text-white placeholder-gray-600"
+                    placeholder="••••••••"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    />
+                </div>
               </div>
             </div>
 
             <button
               type="submit"
-              className="mt-8 w-full py-3 rounded-xl font-black tracking-wide bg-gradient-to-r from-[#6D5CFF] to-[#8F6CFF] hover:shadow-xl hover:shadow-[#6D5CFF]/30 transition active:scale-[0.98]"
+              className="mt-8 w-full py-4 rounded-2xl font-black tracking-wide text-sm bg-gradient-to-br from-primary-500 to-indigo-600 hover:from-primary-400 hover:to-indigo-500 text-white shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40 transition-all active:scale-[0.98] border border-white/10"
             >
               Enter Vaani
             </button>
 
-            <p className="mt-6 text-center text-sm text-white/60">
+            <p className="mt-8 text-center text-sm font-medium text-gray-400">
               Don’t have an account?{' '}
               <Link
                 to="/register"
-                className="text-[#8F6CFF] font-bold hover:underline"
+                className="text-primary-400 hover:text-primary-300 font-bold hover:underline underline-offset-4 transition-colors"
               >
                 Create one
               </Link>

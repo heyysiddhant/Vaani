@@ -70,14 +70,17 @@ const ArchivedChatsPage = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-950 transition-colors selection:bg-primary-500/30">
+        <div className="min-h-screen bg-gray-50/30 dark:bg-gray-950/30 transition-colors relative overflow-hidden">
+            <div className="absolute top-[10%] right-[10%] w-[40%] h-[40%] bg-primary-600/5 blur-[120px] rounded-full mix-blend-screen pointer-events-none" />
+            <div className="absolute bottom-[20%] left-[10%] w-[30%] h-[30%] bg-amber-600/5 blur-[120px] rounded-full mix-blend-screen pointer-events-none" />
+
             {/* Header */}
-            <div className="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border-b border-gray-100 dark:border-gray-800">
+            <div className="sticky top-0 z-50 bg-white/70 dark:bg-gray-900/70 backdrop-blur-2xl border-b border-gray-200/50 dark:border-white/5">
                 <div className="max-w-4xl mx-auto px-6 h-20 flex items-center justify-between">
                     <div className="flex items-center gap-6">
                         <button 
                             onClick={() => navigate('/dashboard')}
-                            className="p-3 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-2xl transition-all text-gray-500 group active:scale-90"
+                            className="p-3 bg-white/50 dark:bg-gray-800/50 hover:bg-gray-100 dark:bg-gray-800 rounded-2xl transition-all border border-gray-200/50 dark:border-white/5 shadow-sm text-gray-500 hover:text-gray-900 dark:hover:text-white group"
                         >
                             <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
                         </button>
@@ -89,7 +92,7 @@ const ArchivedChatsPage = () => {
                 </div>
             </div>
 
-            <main className="max-w-4xl mx-auto px-6 py-12">
+            <main className="max-w-4xl mx-auto px-6 py-12 relative z-10">
                 {loading ? (
                     <div className="flex flex-col items-center justify-center py-20 space-y-4">
                         <div className="w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
@@ -123,7 +126,7 @@ const ArchivedChatsPage = () => {
                             {archivedChats.map((chat) => (
                                 <div 
                                     key={chat._id}
-                                    className="group relative bg-white dark:bg-gray-900 rounded-[2rem] border border-gray-100 dark:border-gray-800 p-4 transition-all hover:shadow-2xl hover:shadow-primary-500/5 hover:-translate-y-1"
+                                    className="group relative bg-white/60 dark:bg-gray-900/50 backdrop-blur-xl rounded-[2.5rem] border border-gray-200/50 dark:border-white/5 p-4 transition-all hover:shadow-2xl hover:shadow-black/5 hover:-translate-y-1"
                                 >
                                     <div className="flex items-center gap-4">
                                         <div className="relative">
@@ -179,9 +182,9 @@ const ArchivedChatsPage = () => {
 
                 {/* Info Card */}
                 {archivedChats.length > 0 && (
-                    <div className="mt-12 p-6 bg-linear-to-br from-amber-500/5 to-primary-500/5 rounded-[2.5rem] border border-amber-500/10 dark:border-amber-500/20 flex items-start gap-4">
-                        <div className="w-10 h-10 bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 rounded-2xl flex items-center justify-center shrink-0">
-                            <Info size={20} />
+                    <div className="mt-12 p-6 bg-gradient-to-br from-amber-500/10 to-primary-500/5 rounded-[2.5rem] border border-amber-500/20 dark:border-amber-500/20 flex items-start gap-5 backdrop-blur-xl shadow-lg shadow-black/5">
+                        <div className="w-12 h-12 bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-400 rounded-2xl flex items-center justify-center shrink-0 shadow-inner">
+                            <Info size={24} />
                         </div>
                         <div className="space-y-1">
                             <h4 className="text-sm font-black text-gray-900 dark:text-white uppercase tracking-wider">About Archiving</h4>
